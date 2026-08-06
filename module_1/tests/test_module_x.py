@@ -84,3 +84,49 @@ class TestCalculateDiscount:
     def test_raises_value_error_for_empty_tier(self):
         with pytest.raises(ValueError):
             calculate_discount(100.0, "")
+
+
+class TestClassifyPriority:
+    def test_urgent_boundary(self):
+        assert classify_priority(90) == "urgent"
+
+    def test_urgent_max(self):
+        assert classify_priority(100) == "urgent"
+
+    def test_high_boundary(self):
+        assert classify_priority(70) == "high"
+
+    def test_high_upper_edge(self):
+        assert classify_priority(89) == "high"
+
+    def test_medium_boundary(self):
+        assert classify_priority(40) == "medium"
+
+    def test_medium_upper_edge(self):
+        assert classify_priority(69) == "medium"
+
+    def test_low_boundary(self):
+        assert classify_priority(0) == "low"
+
+    def test_low_upper_edge(self):
+        assert classify_priority(39) == "low"
+
+    def test_raises_type_error_for_non_int(self):
+        with pytest.raises(TypeError):
+            classify_priority(50.5)
+
+    def test_raises_type_error_for_bool_is_allowed_as_int(self):
+        # bool is a subclass of int in Python, so this should not raise TypeError.
+        assert classify_priority(True) == "low"
+
+    def test_raises_type_error_for_string(self):
+        with pytest.raises(TypeError):
+            classify_priority("50")
+
+    def test_raises_value_error_for_negative_score(self):
+        with pytest.raises(ValueError):
+            classify_priority(-1)
+
+    def test_raises_value_error_for_score_above_100(self):
+        with pytest.raises(ValueError):
+            classify_priority(101)
