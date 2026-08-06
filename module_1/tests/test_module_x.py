@@ -130,3 +130,57 @@ class TestClassifyPriority:
     def test_raises_value_error_for_score_above_100(self):
         with pytest.raises(ValueError):
             classify_priority(101)
+
+
+class TestSummarizeOrder:
+    def test_empty_order(self):
+        assert summarize_order([]) == {"item_count": 0, "subtotal": 0.0}
+
+    def test_single_item(self):
+        result = summarize_order([{"quantity": 2, "unit_price": 5.0}])
+        assert result == {"item_count": 2, "subtotal": 10.0}
+
+    def test_multiple_items(self):
+        items = [
+            {"quantity": 2, "unit_price": 5.0},
+            {"quantity": 1, "unit_price": 3.5},
+        ]
+        result = summarize_order(items)
+        assert result == {"item_count": 3, "subtotal": 13.5}
+
+    def test_rounds_subtotal_to_two_decimal_places(self):
+        items = [{"quantity": 3, "unit_price": 0.1}]
+        result = summarize_order(items)
+        assert result == {"item_count": 3, "subtotal": 0.3}
+
+    def test_missing_quantity_defaults_to_zero(self):
+        result = summarize_order([{"unit_price": 5.0}])
+        assert result == {"item_count": 0, "subtotal": 0.0}
+
+    def test_missing_unit_price_defaults_to_zero(self):
+        result = summarize_order([{"quantity": 2}])
+        assert result == {"item_count": 2, "subtotal": 0.0}
+
+    def test_accepts_int_unit_price(self):
+        result = summarize_order([{"quantity": 2, "unit_price": 5}])
+        assert result == {"item_count": 2, "subtotal": 10.0}
+
+    def test_zero_quantity_item(self):
+        result = summarize_order([{"quantity": 0, "unit_price": 5.0}])
+        assert result == {"item_count": 0, "subtotal": 0.0}
+
+    def test_raises_value_error_for_negative_quantity(self):
+        with pytest.raises(ValueError):
+            summarize_order([{"quantity": -1, "unit_price": 5.0}])
+
+    def test_raises_value_error_for_non_int_quantity(self):
+        with pytest.raises(ValueError):
+            summarize_order([{"quantity": 2.5, "unit_price": 5.0}])
+
+    def test_raises_value_error_for_negative_unit_price(self):
+        with pytest.raises(ValueError):
+            summarize_order([{"quantity": 1, "unit_price": -5.0}])
+
+    def test_raises_value_error_for_non_numeric_unit_price(self):
+        with pytest.raises(ValueError):
+            summarize_order([{"quantity": 1, "unit_price": "5.0"}])
