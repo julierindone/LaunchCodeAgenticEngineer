@@ -48,5 +48,9 @@ RUN echo 'export PS1="ai-course:\\w# "' >> /root/.bashrc && \
     echo 'alias python="python3"' >> /root/.bashrc && \
     echo 'alias pip="pip3"' >> /root/.bashrc
 
+# Git identity
+RUN git config --global user.name "Julie Rindone" && \
+    git config --global user.email "julie.rindone@gmail.com"
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["/bin/bash"]
