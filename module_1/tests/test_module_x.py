@@ -184,3 +184,42 @@ class TestSummarizeOrder:
     def test_raises_value_error_for_non_numeric_unit_price(self):
         with pytest.raises(ValueError):
             summarize_order([{"quantity": 1, "unit_price": "5.0"}])
+
+
+class TestIsValidProjectCode:
+    def test_valid_code(self):
+        assert is_valid_project_code("AB-1234") is True
+
+    def test_invalid_lowercase_prefix(self):
+        assert is_valid_project_code("ab-1234") is False
+
+    def test_invalid_mixed_case_prefix(self):
+        assert is_valid_project_code("Ab-1234") is False
+
+    def test_invalid_prefix_length(self):
+        assert is_valid_project_code("ABC-1234") is False
+
+    def test_invalid_prefix_non_alpha(self):
+        assert is_valid_project_code("A1-1234") is False
+
+    def test_invalid_number_length(self):
+        assert is_valid_project_code("AB-123") is False
+        assert is_valid_project_code("AB-12345") is False
+
+    def test_invalid_number_non_digit(self):
+        assert is_valid_project_code("AB-12A4") is False
+
+    def test_missing_separator(self):
+        assert is_valid_project_code("AB1234") is False
+
+    def test_too_many_separators(self):
+        assert is_valid_project_code("AB-12-34") is False
+
+    def test_non_string_input_returns_false(self):
+        assert is_valid_project_code(1234) is False
+
+    def test_none_input_returns_false(self):
+        assert is_valid_project_code(None) is False
+
+    def test_empty_string_returns_false(self):
+        assert is_valid_project_code("") is False
