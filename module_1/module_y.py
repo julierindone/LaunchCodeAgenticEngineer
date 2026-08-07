@@ -10,12 +10,14 @@ from __future__ import annotations
 
 
 def format_currency(amount: float) -> str:
+    """Return amount formatted as a dollar string, e.g. -12.5 -> "-$12.50"."""
     if amount < 0:
         return f"-${abs(amount):,.2f}"
     return f"${amount:,.2f}"
 
 
 def build_report_title(project_name: str, version: str) -> str:
+    """Return a "Project — Version" title, filling in defaults for blank inputs."""
     clean_project = " ".join(project_name.strip().split())
     clean_version = version.strip()
 
@@ -28,6 +30,10 @@ def build_report_title(project_name: str, version: str) -> str:
 
 
 def mask_email(email: str) -> str:
+    """Return email with the local part partially masked, e.g. "ab@x.com" -> "a*@x.com".
+
+    Raises ValueError if email has no "@" or is missing a local part or domain.
+    """
     email = email.strip()
     if "@" not in email:
         raise ValueError("email must contain @")
@@ -47,6 +53,7 @@ def mask_email(email: str) -> str:
 
 
 def generate_summary_line(name: str, status: str, score: int) -> str:
+    """Return a "Name: status (score)" line with the name title-cased and status normalized."""
     display_name = " ".join(name.strip().split()).title()
     display_status = status.strip().lower().replace("_", " ")
 
@@ -57,6 +64,10 @@ def generate_summary_line(name: str, status: str, score: int) -> str:
 
 
 def create_markdown_table(rows: list[dict[str, object]], columns: list[str]) -> str:
+    """Return a Markdown table with the given columns as headers, one row per dict in rows.
+
+    Missing keys in a row render as an empty cell. Raises ValueError if columns is empty.
+    """
     if not columns:
         raise ValueError("columns cannot be empty")
 
@@ -72,6 +83,10 @@ def create_markdown_table(rows: list[dict[str, object]], columns: list[str]) -> 
 
 
 def truncate_text(text: str, max_length: int = 80) -> str:
+    """Return text collapsed to single-spaced words and truncated to max_length, adding "..." if cut.
+
+    Raises ValueError if max_length is less than 4.
+    """
     if max_length < 4:
         raise ValueError("max_length must be at least 4")
 

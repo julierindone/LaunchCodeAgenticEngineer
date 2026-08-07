@@ -77,6 +77,23 @@ docker run -it --rm -v claude-auth:/claude-auth -p 8501:8501 agentic_engineer_1
 
 Note: any files created inside the container will be lost when it exits.
 
+## Project Structure
+
+```
+module_1/
+├── Dockerfile              # Python 3.12 image with Claude Code, AI/ML libraries, and course tooling
+├── docker-entrypoint.sh     # Container startup script (Claude auth persistence, onboarding)
+├── requirements.txt         # Python dependencies (streamlit, anthropic, fastapi, etc.)
+├── settings.json            # Claude Code status line configuration
+├── statusline.sh            # Status line script referenced by settings.json
+├── CLAUDE.md                # Guidance for Claude Code when working in this directory
+├── agent_docker_check.md    # Agent task prompt for reviewing the Docker setup
+├── module_x.py              # Business-rule utilities ("Session A" agent task: add tests, don't modify)
+└── module_y.py              # Formatting/reporting utilities ("Session B" agent task: add docstrings, don't modify tests)
+```
+
+`module_x.py` and `module_y.py` are companion examples for a parallel multi-agent exercise: one agent writes tests against `module_x.py` while another documents `module_y.py`, without either agent touching the other's file or any test files.
+
 ## Gmail API Credentials
 
 To use the Gmail API, you need a `credentials.json` file downloaded from the [Google Cloud Console](https://console.cloud.google.com/).
