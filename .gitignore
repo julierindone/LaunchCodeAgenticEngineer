@@ -5,6 +5,7 @@ LaunchCodeAgenticEngineer.code-workspace
 credentials.json
 google_cred.json
 token.json
+settings.local.json
 summary.txt
 test.txt
 .DS_Store
