@@ -32,4 +32,5 @@ Because it's a background process, I had to monitor slack to see when it was com
 Had to do some math to figure out token usage.
 
 #### Changes made:
-None - baseline
+- Fix 1 (summary length): 6656cb9 — agent: email-summarize v0.1.1
+- Fix 2 (slack ts logging): c0cf67d — agent: email-summarize v0.1.2
