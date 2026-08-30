@@ -6,7 +6,7 @@
 Measures whether the agent called the Gmail and Slack MCP tools with correct parameters. A high score requires the agent to retrieve the right data and post to the right destination without errors.
 
 ### 1.1.2 Output Format Compliance
-Measures whether the Slack message matches the required template exactly — sender name, sender address, and a 2-line summary per email.
+Measures whether the Slack message matches the required template exactly — sender name, sender address, and a 2-line summary per email, 20 words or less per line.
 
 ### 1.1.3 Edge Case Handling
 Measures whether the agent handled zero unread emails and multiple unread emails correctly, without crashing, hallucinating content, or skipping messages.
@@ -42,7 +42,7 @@ Measures whether the agent verified and reported that the Slack post actually su
 **1 — Does not meet:** Slack message doesn't follow the template — missing sender info, no summary, or garbled formatting.
 > *Example:* Message posted is just a raw email dump with no sender name/address or summary structure.
 
-**2 — Partially meets:** Template is mostly followed but missing one element (e.g., sender address present, sender name missing).
+**2 — Partially meets:** Template is mostly followed but missing one element (e.g., sender address present, sender name missing) OR summary lines go over the limit of 20 words each.
 > *Example:* Summary omits the sender's email address, showing only their display name.
 
 **3 — Meets:** Slack message includes sender name, sender address, and a 2-line summary for every email, matching the template.
