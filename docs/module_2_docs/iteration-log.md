@@ -1,37 +1,35 @@
 # Iteration Log
 
-## Run 001 | 8/28/26 | Baseline
+## Run 001 | 8/30/26 | Baseline
 - **Agent/Tool used:** Claude
-- **Task:** When asked to summarize email or send email summaries to Slack, cecks new Gmail messages and post a summary to the #general Slack channel.
+- **Task:** When asked to summarize email or send email summaries to Slack, reads newest 10 Gmail messages and post a summary to the #general Slack channel.
 
 ### Rubric Scores:
-**I'm not doing this - the wrong rubric was in the repo, and I've spent way too much time troubleshooting in this lesson to be waste any more writing one for this.**
-
-| Dimension | Score (1-4) | Notes           |
-| --------- | ----------- | --------------- |
-|           |             |                 |
-|           |             |                 |
-|           |             |                 |
-| Total     | {X / Y}     | Pass threshold: |
+| Dimension                | Score (1-4) | Notes                                                               |
+| ------------------------ | ----------- | ------------------------------------------------------------------- |
+| Tool Invocation Accuracy | 3           | background process - unknown whether it made one or multiple calls. |
+| Output Format Compliance | 4           | included summary and whether or not action is needed                |
+| Edge Case Handling       | n/a         | not edge case                                                       |
+| Autonomy Respect         | 4           | background process - full recap in run log                          |
+| Confirmation Behavior    | 4           | Included full confirmation details                                  |
+| Total                    | 15/16       | Pass threshold: 3+ on each                                          |
 
 ### Measurements:
-**There was no status bar, and none of these things were displayed, I guess because Claude was used as a background process.**
-- Cycle time:
-		Start: 2026-08-28T22:14:22
-		Actually finished: 15:53
-- Review latency: {X min}
-- Cost per run: ${X.XX} ({token input} in / {token output} out)
+- Cycle time: 1 min
+- Review latency: 3.5 min
+- Cost per run: $0.27 ( 215,744 in / 2,873 out)
 
-### Pass/Fail: Being that this wasted 1.5 hours of my life to send 10 emails to Slack, I would call that a fail.
+### Pass/Fail: True
 
 ### Observations
 
 #### What worked
-Once I troubleshooted the heck out of it, it did what i asked.
+Successfully posted to slack in format requested.
+Full details available in the run log created.
+
 #### What failed
-1. The command. It took (my desktop) Claude and I at least 10 attempts before we came up with the right syntax and the right combinations of flags and values before it would work. This is what (finally) did:
-   `claude -p --agent email-summarize --allowedTools="mcp__gmail__search_emails,mcp__gmail__read_email,mcp__slack__slack_list_channels,mcp__slack__slack_post_message" "Fetch 10 newest unread Gmail messages, summarize each one, post the result to #general, and confirm success."`
-2. Too many emails. Had to alter prompt for newest 10 only.
+Because it's a background process, I had to monitor slack to see when it was completed.
+Had to do some math to figure out token usage.
 
 #### Changes made:
 None - baseline
