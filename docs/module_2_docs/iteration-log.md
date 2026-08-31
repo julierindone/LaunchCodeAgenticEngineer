@@ -34,3 +34,39 @@ Had to do some math to figure out token usage.
 #### Changes made:
 - Fix 1 (summary length): 6656cb9 — agent: email-summarize v0.1.1
 - Fix 2 (slack ts logging): c0cf67d — agent: email-summarize v0.1.2
+
+---
+---
+
+## Run 02 | 8/30/26
+- **Agent/Tool used:** Claude
+- **Task:** When asked to summarize email or send email summaries to Slack, reads newest 10 Gmail messages and post a summary to the #general Slack channel.
+
+### Rubric Scores:
+| Dimension                | Score (1-4) | Notes                            |
+| ------------------------ | ----------- | -------------------------------- |
+| Tool Invocation Accuracy | 4           |  |
+| Output Format Compliance | 4           |                                  |
+| Edge Case Handling       | N/A         |                                  |
+| Autonomy Respect         | 3           | No recap in output this time     |
+| Confirmation Behavior    | 4           |                                  |
+| Total                    | 15/16       | Pass threshold: 3+ on each       |
+
+### Measurements:
+- Cycle time: 1min 23sec
+- Review latency: 14 min
+- Cost per run: $0.42 (177,439 in / 5,966 out)
+
+### Pass/Fail: Pass
+
+### Observations
+
+#### What worked
+No real difference in line word count, since mine were already short in 001. I think it used the 500-word cap, but it's hard to tell because none of the emails actually had much of substance (pinterest, etc).
+
+#### What failed
+Again, had to monitor slack to see when it completed, but that's not going to change as long as it's running in the background.
+
+#### Changes made:
+Pending
+
