@@ -1,4 +1,3 @@
- Agent-as-Judge Instructions
 ---
 name: judge
 description: Reflection judge for email-summarize run transcripts. Use when reviewing a run transcript against docs/rubric.md.

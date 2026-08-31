@@ -2,7 +2,7 @@
 
 ## Run 001 | 8/30/26 | Baseline
 - **Agent/Tool used:** Claude
-- **Task:** When asked to summarize email or send email summaries to Slack, reads newest 10 Gmail messages and post a summary to the #general Slack channel.
+- **Task:** When asked to summarize email or send email summaries to Slack, reads newest 10 Gmail messages and post a summary to the #test Slack channel.
 
 ### Rubric Scores:
 | Dimension                | Score (1-4) | Notes                                                               |
@@ -40,7 +40,7 @@ Had to do some math to figure out token usage.
 
 ## Run 02 | 8/30/26
 - **Agent/Tool used:** Claude
-- **Task:** When asked to summarize email or send email summaries to Slack, reads newest 10 Gmail messages and post a summary to the #general Slack channel.
+- **Task:** When asked to summarize email or send email summaries to Slack, reads newest 10 Gmail messages and post a summary to the #test Slack channel.
 
 ### Rubric Scores:
 | Dimension                | Score (1-4) | Notes                            |
