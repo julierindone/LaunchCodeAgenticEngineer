@@ -70,3 +70,9 @@ Again, had to monitor slack to see when it completed, but that's not going to ch
 #### Changes made:
 Pending
 
+### Judge review (run-2-judge-output.txt):
+- Proposed 3 changes.
+- Accepted 1: Fix 3 (confirmation URL), committed as v0.1.3 in [sha].
+- Rejected 1: Judge proposed removing thread_ts logging; misread the transcript — ts was logged correctly. No change made.
+- Deferred 1: Tighter sender-name extraction rule — added to proposed fixes for Run 4.
+
