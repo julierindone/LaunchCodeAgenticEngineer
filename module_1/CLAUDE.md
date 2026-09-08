@@ -36,3 +36,7 @@ Access at `http://localhost:8501`.
 ## Gmail API Setup
 
 Place `credentials.json` (from Google Cloud Console) in your workspace directory. On first run it triggers OAuth and saves `token.json`. Both files should be in `.gitignore`.
+
+## Compaction Policy
+
+Compaction is a last resort. Proactive summarization (see .claude/skills/summarize-session/SKILL.md) should be triggered before the context window exceeds 60% capacity to avoid relying on compaction.
