@@ -35,6 +35,8 @@ RUN mkdir -p /root/.claude
 COPY settings.json /root/.claude/settings.json
 COPY statusline.sh /root/.claude/statusline.sh
 RUN chmod +x /root/.claude/statusline.sh
+RUN mkdir -p /root/.claude/skills
+COPY .claude/skills/ /root/.claude/skills/
 
 # Copy entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
