@@ -1,5 +1,19 @@
 # Routing and Tool Grant Map
 
+## Table from text example:
+| Role            | Receives                   | Produces                | Granted             | Denied (reason)                                                                                                                    | Isolation reason                                                                                                                   | Autonomy                                                  |
+| --------------- | -------------------------- | ----------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Planner         | Feature request, repo path | Plan + file list        | read, search        | write (no code), shell, test (no test), tracker (PM owns), search-web (n/a)                                                        | Reads code, never changes it; no write/execute keeps context lean, blast radius zero                                               | High (plans are cheap to fix)                             |
+| Implementer     | Plan + file list           | Modified files          | read, write, search | shell (no arbitrary commands), test (Tester owns), tracker (PM owns), search-web (n/a)                                             | Needs read/write to change code; no test tool means it can't grade its own work; no ticket tool means it can't move tickets itself | Medium (writes files; pause before anything irreversible) |
+| Reviewer        | Modified files             | Review report           | read, search        | write (proposes, never edits), shell, test (Tester owns), tracker (PM owns), search-web (n/a)                                      | Read-only by design; with no write/execute it can only propose, never act, so blast radius is zero even at high autonomy           | High (read-only; proposes, never changes)                 |
+| Tester          | Modified files             | Pass/fail report        | read, test          | write (must not mask failures), search (not needed to run tests), shell (test tool covers it), tracker (PM owns), search-web (n/a) | Owns test execution only; no write means it can't quietly edit code to pass a failing test                                         | Medium (executes code, bounded to the test runner)        |
+| Project Manager | Run summary                | Ticket update confirmed | tracker             | read, write, search, shell, test, search-web (none needed to update a ticket)                                                      | Sole owner of the ticket tool; no coding role carries it, so it never enters any coding role's context                             | Medium (changes a shared record; only after confirmation) |
+
+
+---
+---
+## Pre-existing content of file  
+
 Project: `proj-csv`
 
 This map is the design decision of record. Agent definitions in `.agents/` implement this table. When a definition and this map disagree, update the definition to match the map.
