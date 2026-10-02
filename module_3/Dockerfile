@@ -95,10 +95,10 @@ RUN curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
 
 # --- Claude Code configuration ---
 RUN mkdir -p /root/.claude/skills
-COPY skills/ /root/.claude/skills/
+COPY .claude/ /root/.claude/skills/
 
 RUN mkdir -p /root/.claude/agents
-COPY agents/ /root/.claude/agents/
+COPY .claude/agents/ /root/.claude/agents/
 
 # Default settings + status line
 COPY settings.json /root/.claude/settings.json
