@@ -79,6 +79,23 @@ RUN npm install -g opencode-ai
 RUN npm install -g @modelcontextprotocol/server-slack
 RUN npm install -g @gongrzhe/server-gmail-autoauth-mcp
 
+# The gmail MCP server's gaxios dependency bundles node-fetch v2, whose gunzip
+# stream handling hits ERR_STREAM_PREMATURE_CLOSE against Google's APIs in some
+# container network environments. Delegate its entry point to Node's native
+# fetch instead, which does not share the bug.
+RUN NODE_FETCH_ENTRY=/usr/local/lib/node_modules/@gongrzhe/server-gmail-autoauth-mcp/node_modules/node-fetch/lib/index.js && \
+    { \
+        echo "'use strict';"; \
+        echo "module.exports = exports = globalThis.fetch;"; \
+        echo "Object.defineProperty(exports, '__esModule', { value: true });"; \
+        echo "exports.default = exports;"; \
+        echo "exports.Headers = globalThis.Headers;"; \
+        echo "exports.Request = globalThis.Request;"; \
+        echo "exports.Response = globalThis.Response;"; \
+        echo "exports.FetchError = Error;"; \
+        echo "exports.AbortError = Error;"; \
+    } > "$NODE_FETCH_ENTRY"
+
 # Verify Node tooling versions (non-fatal for version flags, fatal for missing binaries).
 RUN node --version && \
     npm --version && \

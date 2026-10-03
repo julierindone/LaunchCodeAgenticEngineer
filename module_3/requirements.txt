@@ -19,7 +19,7 @@ httpx
 # --- Module 3.2: Local MCP server development ---
 # FastMCP/MCP: build and run local MCP servers (storage + retrieval)
 fastmcp
-mcp
+mcp<2  # coursetools_server.py uses FastMCP (renamed in mcp 2.x)
 
 # SQLite async driver: persistent storage backend for the storage MCP server
 aiosqlite

@@ -3,5 +3,6 @@
     "type": "command",
     "command": "bash /root/.claude/statusline.sh",
     "padding": 0
-  }
+  },
+  "model": "claude-sonnet-5"
 }
