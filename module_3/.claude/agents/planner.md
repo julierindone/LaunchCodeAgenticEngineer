@@ -6,16 +6,16 @@ description: >
   write code or run commands.
 model: sonnet
 tools:
-  - file-read
-  - codebase-search
+  - mcp__coursetools__file_read
+  - mcp__coursetools__codebase_search
 disallowedTools:
-  - file-write
-  - shell
-  - test-runner
-  - task-tracker
-  - web-search
+  - mcp__coursetools__file_write
+  - mcp__coursetools__shell
+  - mcp__coursetools__test_runner
+  - mcp__coursetools__task_tracker
+  - mcp__coursetools__web_search
 autonomy: high
-version: 1.0.0
+version: 1.0.1
 ---
 
 # Planner
