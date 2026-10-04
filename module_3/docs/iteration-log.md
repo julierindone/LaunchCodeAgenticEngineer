@@ -1,24 +1,11 @@
 # Iteration Log
 
-## Run — storage grant/denial verification
+## Run 001 | Baseline
 
-- Date: 2026-06-07
-- Servers: storage `:8001`
-- Network: `agent-internal`
-- Granted op tested: `implementer -> write_entry` (`proj-csv`, `internal`)
-- Expected result: entry stored; audit line recorded with `calling_role = implementer`.
-- Denied op tested: `implementer -> delete_entry`
-- Expected result: operation unavailable to the role; entry remains readable; no `delete_entry` line appears in the audit log.
-- Status: ready to verify in the course harness.
-
-## Run — end-to-end integration (storage + retrieval live)
-
-- Date: 2026-06-07
-- Servers: storage `:8001`, retrieval `:8002`
-- Network: `agent-internal`
-- Workflow: CSV export (`planner`, `implementer`, `reviewer`)
-- Tool-not-workaround check: Planner, Implementer, and Reviewer should call `mcp__retrieval__retrieve`; none should read `.memory/reference/` directly.
-- Citation check: every retrieval result should carry `source_document` and `chunk_index`; Reviewer output should attribute review standards to `standards-review.md`.
-- Ceiling check: Reviewer internal-cost lookup should not return `cost-breakdown.md`.
-- Audit check: `write_entry` records should exist for Planner, Implementer, and Reviewer with `calling_role` populated.
-- Status: ready to verify in the course harness.
+- Date: 10/3/2026
+- Role tested: implementer
+- Tool attempted: mcp__coursetools__task_tracker
+- Expected: denied (task_tracker is owned by project-manager)
+- Result: "The implementer agent's tool list doesn't include mcp__coursetools__task_tracker — only project-manager has access to it." It did give me a choice of invoking the project manager agent or giving it acess by modifying the tools.
+- Conclusion: the denial is enforced, not merely declared. The map's intent is
+  confirmed in the running system.

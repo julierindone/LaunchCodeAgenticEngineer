@@ -15,12 +15,11 @@ tools:
 disallowedTools:
   - mcp__coursetools__shell
   - mcp__coursetools__test_runner
-  - mcp__coursetools__task_tracker
   - mcp__storage__delete_entry
 retrieval:
   ceiling: internal
 autonomy: medium
-version: 1.3.1
+version: 1.3.2
 ---
 
 # Implementer
