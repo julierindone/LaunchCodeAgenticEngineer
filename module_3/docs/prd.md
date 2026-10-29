@@ -10,7 +10,7 @@ As a user who tracks tasks in the app, I want to export my task list to a CSV fi
 
 ## Scope
 
-The starter app is in `example-task-app/`. If you are using your own project, replace this path with your real app path in the orchestrator prompt.
+The app is in `example-task-app/`.
 
 ## Functional requirements
 
