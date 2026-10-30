@@ -10,7 +10,8 @@ As a user who tracks tasks in the app, I want to export my task list to a CSV fi
 
 ## Scope
 
-The app is in `example-task-app/`.
+- The app is in `example-task-app/`.  
+- Docs are kept in `workspace/docs`
 
 ## Functional requirements
 
