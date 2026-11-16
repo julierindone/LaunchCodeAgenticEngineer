@@ -142,6 +142,35 @@ docker run -it --rm \
 
 Any files created inside the container will be lost when it exits.
 
+### Running on the internal network (Module 3)
+
+Runs the container on an internal Docker bridge network instead of `--network none`, so the agent can reach MCP servers on localhost but still can't reach the internet.
+
+Create the network once (it persists until removed):
+
+```bash
+docker network create --internal agent-internal
+```
+
+Then start the container on it:
+
+```bash
+docker run -it --rm \
+  --network agent-internal \
+  -v claude-auth:/claude-auth \
+  -v $(pwd):/workspace:rw \
+  -v $(pwd)/.memory:/memory:rw \
+  -e OPENROUTER_API_KEY=$OPENROUTER_API_KEY \
+  -e SLACK_BOT_TOKEN=dummy \
+  -e SLACK_TEAM_ID=dummy \
+  agentic_engineer_3 bash
+```
+
+- `SLACK_BOT_TOKEN` and `SLACK_TEAM_ID` must be set (`dummy` works) or the container fails at startup with a Slack error.
+- Published ports (`-p`) aren't reachable from the host on an internal network, so use one of the commands above when you need Streamlit or the MCP Inspector in your browser.
+
+See [setup.md](setup.md) for the loopback and egress checks.
+
 ---
 
 ## MCP Servers
